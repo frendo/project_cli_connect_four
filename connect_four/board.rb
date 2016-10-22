@@ -38,4 +38,49 @@ class Board
 			end
 		end
 	end
+	def check_horizontals(board)
+		board.each do |row|
+			row_str = row.join('').to_s
+			if ((row_str.include? "rrrr") || (row_str.include? "yyyy")) 
+				return true
+			else
+				return false
+			end
+		end
+	end
+	def check_verticals()
+		for column in 0...COLUMNS do
+			chips = ''
+			for row in 0...ROWS do
+				chips = chips + @board[row][column].to_s
+			end
+			if ((chips.include? "rrrr")  || (chips.include? "yyyy"))
+				return true
+			else
+				return false
+			end
+		end
+	end
+	def check_diagonals()
+		padding = @board.size - 1
+		padded_matrix = []
+		@board.each do |row|
+			inverse_padding = @board.size - padding
+			padded_matrix << ([nil] * inverse_padding) + row + ([nil] * padding)
+			padding -= 1
+		end
+		if check_horizontals(padded_matrix)
+			return true
+		else
+			return false
+		end
+	end
+	def check_status()
+		if (check_horizontals(@board) || check_verticals() || check_diagonals())
+			return true
+		else
+
+			return false
+		end
+	end
 end

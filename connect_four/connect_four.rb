@@ -18,6 +18,7 @@ class ConnectFour
 	def play()
 		prep_new_game()
 		while true
+
 			puts "***********************************"
 			@board.render_board()
 			puts "***********************************"
@@ -25,13 +26,26 @@ class ConnectFour
 			puts @player_one.get_chip_stack()
 			puts "Player One make your move:"
 			move(@player_one)
+			puts "***********************************"
 			@board.render_board()
+			puts "***********************************"
+			if @board.check_status
+				 puts "Player One wins!"
+				break
+			else
+			end
 			puts "Player Two:"
 			puts @player_two.get_chip_stack()
 			puts "Player Two make your move:"
 			move(@player_two)
 			puts "***********************************"
 			@board.render_board()
+			puts "***********************************"
+			if @board.check_status
+				 puts "Player Two wins!"
+				break
+			else
+			end
 			puts "***********************************"
 			
 		end
